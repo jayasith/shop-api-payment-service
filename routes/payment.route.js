@@ -1,9 +1,9 @@
 const router = require("express").Router();
 
-const { addPayment, getAllPayment, getPaymentTotal } = require("../controllers/payment.controller");
+const { addPayment, getAllPayments, getPaymentTotal } = require("../controllers/payment.controller");
 
 router.post("/", addPayment);
-router.get("/", getAllPayment);
+router.get("/", getAllPayments);
 router.get("/total", getPaymentTotal);
 
 module.exports = router;

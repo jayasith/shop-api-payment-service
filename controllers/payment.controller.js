@@ -33,4 +33,4 @@ const getPaymentTotal = async (req, res) => {
 		res.status(400).json(err);
 	}
 };
-module.exports = { addPayment, getAllPayment, getPaymentTotal };
+module.exports = { addPayment, getAllPayments, getPaymentTotal };
