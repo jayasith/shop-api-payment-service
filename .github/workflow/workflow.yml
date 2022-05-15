@@ -1,4 +1,4 @@
-name: Workflows
+name: Docker Build Deploy
 
 on:
   push:
