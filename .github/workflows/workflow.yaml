@@ -33,6 +33,7 @@ jobs:
         creds: '${{secrets.AZURE_CREDENTIAL}}'
         resource-group: ctse-resources-group
         cluster-name: cluster-ctse
+        
     - name: Create secret in Kubernetes cluster
       uses: Azure/k8s-create-secret@v1.1
       with:
