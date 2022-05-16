@@ -26,3 +26,28 @@ jobs:
         file: ./Dockerfile
         push: true
         tags: ${{ secrets.DOCKER_USERNAME }}/shop-api-payment-service:${{ github.sha }}
+
+    - name: Azure Kubernetes set context
+      uses: Azure/aks-set-context@v1
+      with:
+        creds: '${{secrets.AZURE_CREDENTIAL}}'
+        resource-group: ctse-resources-group
+        cluster-name: cluster-ctse
+    - name: Create secret in Kubernetes cluster
+      uses: Azure/k8s-create-secret@v1.1
+      with:
+        container-registry-url: https://index.docker.io/v1/
+        container-registry-username: '${{secrets.DOCKER_USERNAME}}'
+        container-registry-password: '${{secrets.DOCKER_ACCESS_TOKEN}}'
+        secret-type: docker-registry
+        secret-name: docker-image-pull-secret
+
+    - name: Deploy to Kubernetes cluster
+      uses: Azure/k8s-deploy@v1
+      with:
+        manifests: |
+          k8s/deployment.yml
+          k8s/service.yml
+        images: '${{secrets.DOCKER_USERNAME}}/shop-api-payment-service:${{github.sha}}'
+        imagepullsecrets: docker-image-pull-secret
+        action: deploy

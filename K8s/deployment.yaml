@@ -1,0 +1,23 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: githubactions-aks-demo
+spec:
+  selector:
+    matchLabels:
+      app: shop-api-payment-service
+  template:
+    metadata:
+      labels:
+        app: shop-api-payment-service
+    spec:
+      containers:
+        - name: shop-api-payment-service
+          image: jayasith98/shop-api-payment-service
+          resources:
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+          ports:
+            - containerPort: 8080
