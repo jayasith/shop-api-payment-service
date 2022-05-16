@@ -12,4 +12,4 @@ ENV PORT 5007
 
 EXPOSE $PORT
 
-CMD ["npm", "start",]
+CMD ["npm", "start"]
